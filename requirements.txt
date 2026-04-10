@@ -1,0 +1,3 @@
+numpy>=1.23
+# Optional: visualization (only needed for scripts/plot_run.py)
+# matplotlib>=3.5
