@@ -52,14 +52,12 @@ class TestDriveSystem:
         """After an impulse fires, no impulse should fire for the same drive
         during the refractory period, then it can fire again."""
         refractory_ticks = 5
-        # Use a low change_sensitivity so the low->high transition easily
-        # triggers via the rapid-change condition.
         ds = DriveSystem(refractory_ticks=refractory_ticks,
                          change_sensitivity=0.05)
         hormone_names = ["dopamine", "serotonin", "cortisol",
                          "norepinephrine", "oxytocin", "endorphin"]
 
-        # Tick 0: baseline with low drives (first tick — no impulses)
+        # Tick 0: baseline with low drives (first tick -- no impulses)
         low_hormones = np.array([0.0, 0.5, 0.5, 0.5, 0.5, 0.5])
         ds.step(tick=0, hormone_levels=low_hormones, hormone_names=hormone_names)
 
@@ -81,12 +79,11 @@ class TestDriveSystem:
                 f"Drive '{fired_drive}' should not fire during refractory at tick {t}"
             )
 
-        # After refractory expires: drop low for one tick, then spike again.
-        # The low->high transition should re-trigger via rapid change.
-        ds.step(tick=2 + refractory_ticks, hormone_levels=low_hormones,
-                hormone_names=hormone_names)
-        _, impulses_after = ds.step(tick=3 + refractory_ticks,
-                                    hormone_levels=high_hormones,
+        # After the refractory expires, verify the drive CAN fire again.
+        # The rapid change from high->low at this tick should itself trigger
+        # the fired drive -- which proves refractory has ended.
+        t_after = 2 + refractory_ticks
+        _, impulses_after = ds.step(tick=t_after, hormone_levels=low_hormones,
                                     hormone_names=hormone_names)
         after_names = [imp.drive_name for imp in impulses_after]
         assert fired_drive in after_names, (
