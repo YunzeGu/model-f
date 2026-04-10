@@ -9,3 +9,32 @@ The engine must:
 - Be inspectable/loggable for research analysis
 
 Predecessor: humanoid02 (YunzeGu/humanoid02) — see that repo for earlier research notes.
+
+[2026-04-10] v1 implementation complete.
+Design evolution during this session:
+- Started with 3D cat simulation idea → too complex (need sensory decoding)
+- Moved to "floating brain" concept → no sensory organs, pure internal dynamics
+- Excluded LLM/rational reasoning → even simple animals have desires without logic
+- Excluded language interaction → output is numerical vectors, not text
+- Final scope: pluggable base module for emotion/impulse, capabilities attach later
+
+What was built:
+- 6 hormones (dopamine, serotonin, cortisol, norepinephrine, oxytocin, endorphin)
+  with homeostatic decay, biological noise, circadian oscillation, cross-interactions
+- 6 behavioral drives (seek_novelty, withdraw, engage, rest, seek_comfort, express)
+  with threshold-crossing and rapid-change impulse detection
+- 10 emotion prototypes for cosine-similarity labeling (read-only, no feedback to dynamics)
+- InputPort/OutputPort abstract interfaces for future capability plugins
+- ModelFEngine orchestrator with tick-based simulation loop
+- 15 pytest tests, JSONL logging, matplotlib visualization script
+
+Observations from first run (seed=42, 200 ticks):
+- System settles into "energized/content" mood with engage and express impulses firing
+- Hormones oscillate naturally without any external input — the "floating brain" works
+- Need to tune parameters to produce more diverse behavior (maybe add presets)
+
+Next steps to consider:
+- Parameter tuning / presets ("calm", "volatile", "cycling") for different personality types
+- Longer runs (full circadian cycles) to observe day/night behavioral shifts
+- First capability plugin: simple memory or periodic external stimulus
+- Visualization and analysis of the impulse patterns
