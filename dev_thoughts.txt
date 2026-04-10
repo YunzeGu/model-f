@@ -1,0 +1,11 @@
+[2026-04-10] Model F initialized.
+Core goal: build a clean, standalone Python emotion/hormone state engine.
+No Unity/MLAgents dependency at this stage — pure state model first.
+
+The engine must:
+- Maintain continuous hormone/drive values with natural decay
+- Accept sensory input as state deltas (not overrides)
+- Compute behavioral priority vectors from drive urgency
+- Be inspectable/loggable for research analysis
+
+Predecessor: humanoid02 (YunzeGu/humanoid02) — see that repo for earlier research notes.
