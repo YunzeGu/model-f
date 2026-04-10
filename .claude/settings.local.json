@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(C:\\Users\\80951\\miniconda3\\envs\\mlagents\\python.exe:*)",
+      "Bash(C:\\Users\\80951\\miniconda3\\envs\\mlagents\\Scripts\\pip.exe:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/c/Users/80951/Desktop/Model F\" && git add -A && git commit -m \"auto snapshot $(date +%F_%T)\" && git push"
+          }
+        ]
+      }
+    ]
+  }
+}
