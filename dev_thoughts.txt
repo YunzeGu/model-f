@@ -57,6 +57,13 @@ Future research question — qualia quantization:
   The problem is not the software interface (InputPort exists), but the
   methodology for translating phenomenal quality into numerical deltas.
 
+Scope clarification — this is NOT neuroscience simulation:
+  Model F extracts the functional effect of qualia on behavior, not the neural mechanism.
+  Frameworks like Active Inference (Friston) are far more rigorous and scientifically grounded.
+  Our hormones are named after real ones for intuition, but they're abstract behavioral
+  variables, not biochemical models. This is a pragmatic engineering project, not a
+  neuroscience contribution.
+
 Next steps to consider:
 - Parameter tuning / presets ("calm", "volatile", "cycling") for different personality types
 - Longer runs (full circadian cycles) to observe day/night behavioral shifts
