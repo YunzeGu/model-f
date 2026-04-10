@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from model_f.engine import ModelFEngine
+from model_f.core.hormone_state import HormoneState, HormoneConfig, DEFAULT_HORMONE_CONFIGS
 from model_f.inputs.sensory_adapter import InputPort
 from model_f.outputs.behavior_vector import OutputPort
 
