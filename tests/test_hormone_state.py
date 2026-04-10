@@ -120,25 +120,40 @@ class TestHormoneState:
         )
 
     def test_cross_hormone_interaction(self):
-        """High cortisol should suppress serotonin below its setpoint over time."""
-        configs = _zero_noise_configs()
+        """High cortisol should suppress serotonin below its setpoint over time.
+
+        We disable circadian modulation so the only forces at play are
+        homeostatic decay and the cross-hormone interaction.  We repeatedly
+        inject cortisol each tick to keep it elevated and track serotonin's
+        trajectory.
+        """
+        configs = [
+            HormoneConfig(
+                name=c.name,
+                setpoint=c.setpoint,
+                decay_rate=c.decay_rate,
+                noise_sigma=0.0,
+                circadian_amplitude=0.0,
+                circadian_phase=0.0,
+                initial_value=c.initial_value,
+            )
+            for c in DEFAULT_HORMONE_CONFIGS
+        ]
         state = HormoneState(configs=configs, interactions=DEFAULT_INTERACTIONS)
 
         # Record initial serotonin level (at setpoint 0.6)
         initial_serotonin = state.level("serotonin")
 
-        # Inject cortisol to 1.0
-        deltas = np.zeros(6)
-        deltas[2] = 1.0  # cortisol index
-        state.inject(deltas)
-
-        # Run 50 ticks
+        # Keep cortisol high by re-injecting each tick
         for _ in range(50):
+            deltas = np.zeros(6)
+            deltas[2] = 0.5  # cortisol boost each tick
+            state.inject(deltas)
             state.update()
 
         final_serotonin = state.level("serotonin")
         assert final_serotonin < initial_serotonin, (
-            f"Serotonin should decrease under high cortisol. "
+            f"Serotonin should decrease under sustained high cortisol. "
             f"Initial: {initial_serotonin:.4f}, Final: {final_serotonin:.4f}"
         )
 
