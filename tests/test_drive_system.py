@@ -1,7 +1,6 @@
 import numpy as np
-import pytest
 
-from model_f.core.drive_system import DriveSystem, DriveConfig, DEFAULT_DRIVE_CONFIGS, Impulse
+from model_f.core.drive_system import DriveSystem, Impulse
 
 
 class TestDriveSystem:
