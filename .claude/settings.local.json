@@ -13,7 +13,11 @@
       "Bash(C:\\Users\\80951\\miniconda3\\envs\\mlagents\\Scripts\\pip.exe:*)",
       "Bash(C:/Users/80951/miniconda3/envs/mlagents/python.exe:*)",
       "Bash(\"C:/Users/80951/miniconda3/envs/mlagents/python.exe\" -m pytest tests/ -v)",
-      "Bash(C:/Users/80951/miniconda3/envs/mlagents/Scripts/pip.exe install:*)"
+      "Bash(C:/Users/80951/miniconda3/envs/mlagents/Scripts/pip.exe install:*)",
+      "Bash(C:/Users/80951/miniconda3/condabin/conda.bat create:*)",
+      "Bash(C:/Users/80951/miniconda3/envs/modelf/Scripts/pip.exe install:*)",
+      "Bash(C:/Users/80951/miniconda3/envs/modelf/python.exe -m pytest tests/ -v)",
+      "Bash(C:/Users/80951/miniconda3/envs/modelf/python.exe main.py --ticks 50 --seed 1 --summary-interval 50)"
     ]
   },
   "hooks": {
