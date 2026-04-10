@@ -33,8 +33,33 @@ Observations from first run (seed=42, 200 ticks):
 - Hormones oscillate naturally without any external input — the "floating brain" works
 - Need to tune parameters to produce more diverse behavior (maybe add presets)
 
+Environment migrated from mlagents conda env → modelf conda env.
+Obsidian knowledge graph created in docs/vault/ (30 interconnected notes).
+
+[2026-04-10] Key conceptual clarifications.
+
+Model F's value in embodied AI — the pathfinding example:
+  An agent feels thirsty, water is across the room. Pathfinding says WHERE to go.
+  Model F says HOW to go — anxious (fast, direct, tense) vs. calm (slow, meandering).
+  Skills decide "what to do", Model F modulates "how to feel while doing it."
+
+Critical distinction — per-frame modulation vs. canned animation:
+  NOT: if anxious → play_anxious_walk_animation (discrete state switch, canned)
+  YES: every frame's speed, turn radius, pause frequency is modulated by current
+       hormone values in real time. No two "anxious walks" are ever identical because
+       the underlying hormone state is continuously shifting.
+  This is the difference between acting and being. Model F aims for being.
+
+Future research question — qualia quantization:
+  How to map phenomenally diverse external stimuli into hormone deltas.
+  e.g., a lullaby vs. a scream — both are "sound" physically, but their
+  qualitative experiential impact on internal state is completely different.
+  The problem is not the software interface (InputPort exists), but the
+  methodology for translating phenomenal quality into numerical deltas.
+
 Next steps to consider:
 - Parameter tuning / presets ("calm", "volatile", "cycling") for different personality types
 - Longer runs (full circadian cycles) to observe day/night behavioral shifts
-- First capability plugin: simple memory or periodic external stimulus
+- Qualia quantization research — how to numerically represent experiential quality of stimuli
+- Per-frame embodied integration design — how drive vectors modulate motor parameters continuously
 - Visualization and analysis of the impulse patterns
