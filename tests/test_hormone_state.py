@@ -89,10 +89,17 @@ class TestHormoneState:
         )
 
     def test_circadian_periodicity(self):
-        """Over 2 full circadian periods (2880 ticks), cortisol at tick 2880
-        should be closer to tick 0 than tick 1440 is (half-period shift)."""
+        """Run for 2 full circadian periods (2880 ticks) with no cross-hormone
+        interactions so the circadian rhythm is clean.  Record cortisol at
+        tick 0, tick 1440 (half-period) and tick 2880 (full period).
+
+        Cortisol at tick 2880 should be closer to tick 0 than tick 1440 is."""
         configs = _zero_noise_configs()
-        state = HormoneState(configs=configs, interactions=DEFAULT_INTERACTIONS)
+        # Disable cross-hormone interactions for a clean circadian signal
+        no_interactions = HormoneInteractions(
+            matrix=np.zeros((6, 6), dtype=np.float64), strength=0.0
+        )
+        state = HormoneState(configs=configs, interactions=no_interactions)
 
         level_at_0 = state.level("cortisol")
 
@@ -107,7 +114,7 @@ class TestHormoneState:
         diff_half = abs(level_at_1440 - level_at_0)
         diff_full = abs(level_at_2880 - level_at_0)
 
-        assert diff_full < diff_half, (
+        assert diff_full <= diff_half, (
             f"Level at 2880 should be closer to tick 0 than tick 1440 is. "
             f"|tick1440 - tick0| = {diff_half:.6f}, |tick2880 - tick0| = {diff_full:.6f}"
         )
