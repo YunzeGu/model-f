@@ -88,6 +88,31 @@ Model F is a **base module** designed to accept future capability plugins:
 
 None of these are connected in v1. The core must be fully functional and interesting on its own — a self-contained impulse generator with clean input/output ports for future extension.
 
+## Integration Principle: Continuous Modulation, Not Animation
+
+Model F's output is a **per-frame continuous modulation signal**, not a discrete animation trigger.
+
+### The pathfinding example
+
+An agent feels thirsty. Water is across the room. The pathfinding skill determines the route. Model F determines **how the agent traverses that route**:
+
+- High cortisol (anxious): faster speed, more direct path, tighter turns, fewer pauses
+- High serotonin (calm): slower pace, willingness to meander, relaxed movement
+- High dopamine (eager): quick acceleration, energetic gait
+
+### What this is NOT
+
+Playing a "anxious_walk" animation clip. That is:
+- Discrete (state A → state B)
+- Pre-recorded (identical every time)
+- Performative (the agent is "acting" anxious, not "being" anxious)
+
+### What this IS
+
+Every frame of behavior is modulated by the current hormone state in real time. The drive vector is a continuous field that colors every moment of execution. No two "anxious walks" are ever identical, because the underlying hormones shift every tick. This is the difference between **acting** and **being**.
+
+This higher standard — pursuing continuous experiential modulation rather than discrete behavioral switching — is what gives Model F the potential for genuinely diverse, organic behavior that cannot be achieved through animation state machines.
+
 ## Summary
 
 Model F is a **bionic subconscious**: a system that translates continuous physiological dynamics into spontaneous behavioral impulses, preserving affective fidelity without requiring phenomenal consciousness, and producing non-purposive autonomous drive as its primary output.
