@@ -39,9 +39,22 @@ class TestModelFEngine:
 
     def test_custom_input_port(self):
         """A mock InputPort injecting dopamine at tick 50 should produce a
-        visible increase in dopamine level after that tick."""
+        visible increase in dopamine level after that tick.
+
+        We use zero noise so the injection signal is not overwhelmed by
+        stochastic fluctuations.
+        """
+        zero_noise_configs = [
+            HormoneConfig(
+                name=c.name, setpoint=c.setpoint, decay_rate=c.decay_rate,
+                noise_sigma=0.0, circadian_amplitude=c.circadian_amplitude,
+                circadian_phase=c.circadian_phase, initial_value=c.initial_value,
+            )
+            for c in DEFAULT_HORMONE_CONFIGS
+        ]
+        hormone_state = HormoneState(configs=zero_noise_configs)
         mock_input = MockInputPort(inject_tick=50)
-        engine = ModelFEngine(inputs=[mock_input])
+        engine = ModelFEngine(hormone_state=hormone_state, inputs=[mock_input])
 
         dopamine_levels = {}
 
