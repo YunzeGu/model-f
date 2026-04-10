@@ -17,6 +17,8 @@ Two parallel long-term tracks (both share Model F as their emotional core):
 
 Development notes and research thoughts are tracked in `dev_thoughts.txt`.
 
+**Model F definition and design philosophy** are documented in [`docs/definition.md`](docs/definition.md) — this is the living specification for what Model F is and why it exists. Update it as the concept evolves.
+
 ## Environment & Commands
 
 **Python interpreter** (always use full path — do not use system Python):
