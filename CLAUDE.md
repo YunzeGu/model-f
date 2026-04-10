@@ -43,24 +43,28 @@ Commit and push after every meaningful change so the GitHub remote stays in sync
 **Remote:** `https://github.com/YunzeGu/model-f`
 **Branch:** `main`
 
-## Architecture (Planned)
+## Architecture
 
 ```
-main.py                  ← entry point
+main.py                  ← entry point (CLI with --ticks, --seed, --log flags)
 model_f/
+  engine.py              ← ModelFEngine orchestrator (wires all components)
   core/
-    hormone_state.py     ← internal drive/hormone values & decay functions
-    drive_system.py      ← need/motivation computation from hormone state
-    emotion_map.py       ← maps drive states to discrete emotional labels
+    hormone_state.py     ← HormoneState: 6 hormones with decay, noise, circadian, interactions
+    drive_system.py      ← DriveSystem: hormone→drive mapping + Impulse generation
+    emotion_map.py       ← EmotionMap: cosine-similarity emotion labeling (read-only)
   inputs/
-    sensory_adapter.py   ← normalizes external stimuli into state deltas
+    sensory_adapter.py   ← InputPort ABC + NullInput (capability port for future sensors)
   outputs/
-    behavior_vector.py   ← translates drive state into behavioral command output
+    behavior_vector.py   ← OutputPort ABC + NullOutput/PrintOutput
   utils/
-    logger.py            ← state logging for analysis/replay
+    logger.py            ← StateLogger: JSONL state recording
+tests/                   ← pytest test suite (15 tests)
+scripts/
+  plot_run.py            ← matplotlib visualization of JSONL logs
+docs/
+  definition.md          ← living conceptual definition
 ```
-
-> This is the intended architecture — implement incrementally. Adjust structure as the model evolves and update this file accordingly.
 
 ## Key Design Principles
 
