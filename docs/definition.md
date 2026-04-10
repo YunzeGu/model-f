@@ -43,6 +43,14 @@ Model F:           hormone change → [Model F] → behavioral command
 
 The middle layer (subjective experience) is bypassed, but the causal relationship between input and output is preserved.
 
+### Scope of Rigor: Functional Extraction, Not Neuroscience Simulation
+
+Model F is **not** a neuroscience simulation. It does not aim for biological accuracy at the neural or molecular level. More rigorous computational frameworks exist — e.g., Active Inference (Karl Friston's free energy principle), detailed neurocomputational models of affect — and they are far more scientifically grounded.
+
+Model F's approach is deliberately simpler: **extract the functional effect of qualia on behavior**, and implement that effect directly. The hormones in Model F are not biochemically accurate — they are named after real hormones for intuitive reference, but they are abstract variables whose dynamics are designed to produce behaviorally plausible output, not to model actual endocrine pathways.
+
+This is a pragmatic engineering choice, not a scientific claim. The goal is a useful behavioral engine for AI agents, not a contribution to neuroscience.
+
 ## Purpose: Non-Purposive Autonomous Impulse
 
 Current AI systems are goal-oriented — given an objective, they optimize execution. Model F rejects this paradigm at the surface level.
