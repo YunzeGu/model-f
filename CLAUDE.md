@@ -29,6 +29,12 @@ C:\Users\80951\miniconda3\envs\mlagents\python.exe
 **Run the project:**
 ```bash
 C:\Users\80951\miniconda3\envs\mlagents\python.exe main.py
+C:\Users\80951\miniconda3\envs\mlagents\python.exe main.py --ticks 2880 --seed 42 --log logs/run.jsonl
+```
+
+**Run tests:**
+```bash
+C:\Users\80951\miniconda3\envs\mlagents\python.exe -m pytest tests/ -v
 ```
 
 **Install dependencies:**
