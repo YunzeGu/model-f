@@ -89,11 +89,15 @@ class TestHormoneState:
         )
 
     def test_circadian_periodicity(self):
-        """Run for 2 full circadian periods (2880 ticks) with no cross-hormone
-        interactions so the circadian rhythm is clean.  Record cortisol at
-        tick 0, tick 1440 (half-period) and tick 2880 (full period).
+        """After the system settles into its orbital cycle, cortisol should
+        return to roughly the same level after one full circadian period
+        (1440 ticks).
 
-        Cortisol at tick 2880 should be closer to tick 0 than tick 1440 is."""
+        We let the system warm up for 2 full periods so transients die out,
+        then sample at the start and end of a third period.  The value at
+        the end of the full period should be closer to the start than the
+        half-period value is.
+        """
         configs = _zero_noise_configs()
         # Disable cross-hormone interactions for a clean circadian signal
         no_interactions = HormoneInteractions(
@@ -101,22 +105,27 @@ class TestHormoneState:
         )
         state = HormoneState(configs=configs, interactions=no_interactions)
 
-        level_at_0 = state.level("cortisol")
-
-        for _ in range(1440):
+        # Warm up: run 2 full periods (2880 ticks) to settle into orbit
+        for _ in range(2880):
             state.update()
-        level_at_1440 = state.level("cortisol")
 
-        for _ in range(1440):
+        # Now sample the orbital cycle
+        level_start = state.level("cortisol")
+
+        for _ in range(720):  # half period
             state.update()
-        level_at_2880 = state.level("cortisol")
+        level_half = state.level("cortisol")
 
-        diff_half = abs(level_at_1440 - level_at_0)
-        diff_full = abs(level_at_2880 - level_at_0)
+        for _ in range(720):  # complete the period
+            state.update()
+        level_full = state.level("cortisol")
 
-        assert diff_full <= diff_half, (
-            f"Level at 2880 should be closer to tick 0 than tick 1440 is. "
-            f"|tick1440 - tick0| = {diff_half:.6f}, |tick2880 - tick0| = {diff_full:.6f}"
+        diff_half = abs(level_half - level_start)
+        diff_full = abs(level_full - level_start)
+
+        assert diff_full < diff_half, (
+            f"After warm-up, level at full period should be closer to start than half period. "
+            f"|half - start| = {diff_half:.6f}, |full - start| = {diff_full:.6f}"
         )
 
     def test_cross_hormone_interaction(self):
