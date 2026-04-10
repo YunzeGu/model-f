@@ -28,19 +28,28 @@ def _zero_noise_configs():
 class TestHormoneState:
     def test_homeostatic_convergence(self):
         """Dopamine starts at 1.0 (far from setpoint 0.5), should converge
-        within 0.01 of setpoint after 500 ticks with zero noise."""
-        configs = _zero_noise_configs()
-        # Override dopamine initial value to 1.0
-        configs[0] = HormoneConfig(
-            name=configs[0].name,
-            setpoint=configs[0].setpoint,
-            decay_rate=configs[0].decay_rate,
-            noise_sigma=0.0,
-            circadian_amplitude=configs[0].circadian_amplitude,
-            circadian_phase=configs[0].circadian_phase,
-            initial_value=1.0,
+        close to its setpoint after 500 ticks with zero noise.
+
+        We use zero circadian amplitude to isolate the decay behaviour and
+        a zero-interaction matrix so cross-hormone effects don't shift the
+        equilibrium.
+        """
+        configs = [
+            HormoneConfig(
+                name=c.name,
+                setpoint=c.setpoint,
+                decay_rate=c.decay_rate,
+                noise_sigma=0.0,
+                circadian_amplitude=0.0,
+                circadian_phase=c.circadian_phase,
+                initial_value=1.0 if c.name == "dopamine" else c.setpoint,
+            )
+            for c in DEFAULT_HORMONE_CONFIGS
+        ]
+        no_interactions = HormoneInteractions(
+            matrix=np.zeros((6, 6), dtype=np.float64), strength=0.0
         )
-        state = HormoneState(configs=configs, interactions=DEFAULT_INTERACTIONS)
+        state = HormoneState(configs=configs, interactions=no_interactions)
 
         for _ in range(500):
             state.update()

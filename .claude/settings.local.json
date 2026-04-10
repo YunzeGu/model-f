@@ -11,7 +11,9 @@
       "Bash(git log:*)",
       "Bash(C:\\Users\\80951\\miniconda3\\envs\\mlagents\\python.exe:*)",
       "Bash(C:\\Users\\80951\\miniconda3\\envs\\mlagents\\Scripts\\pip.exe:*)",
-      "Bash(C:/Users/80951/miniconda3/envs/mlagents/python.exe:*)"
+      "Bash(C:/Users/80951/miniconda3/envs/mlagents/python.exe:*)",
+      "Bash(\"C:/Users/80951/miniconda3/envs/mlagents/python.exe\" -m pytest tests/ -v)",
+      "Bash(C:/Users/80951/miniconda3/envs/mlagents/Scripts/pip.exe install:*)"
     ]
   },
   "hooks": {
