@@ -64,6 +64,51 @@ Scope clarification — this is NOT neuroscience simulation:
   variables, not biochemical models. This is a pragmatic engineering project, not a
   neuroscience contribution.
 
+[2026-04-11] Can emotion be learned? And where does Model F sit architecturally?
+
+Why RL / large-model training doesn't work for core emotional dynamics:
+  1. No tokenization — emotion has no agreed-upon atomic unit. Facial expressions,
+     physiological signals, self-reports are all proxies, not the thing itself.
+  2. No data source — language has the internet, vision has billions of images.
+     Internal emotional states have only small-sample psych questionnaires and
+     lab-condition physiological measurements.
+  3. No loss function — "is this the correct emotion?" is circular. You'd need
+     a model of correct emotion to train a model of emotion.
+  All three prerequisites for training are missing simultaneously.
+
+What CAN be trained (peripheral, not core):
+  - Sensory input → hormone delta mapping (qualia quantization) — e.g., use CLIP-like
+    embeddings to learn "this image feels unsettling" → cortisol delta
+  - Parameter tuning via human preference learning — "does this behavior look natural?"
+  - Behavior modulation coefficients from animal ethology data
+
+Existing related work confirms rule-based approach:
+  - Affective computing (Picard/MIT) — recognizes emotion from signals, doesn't generate it
+  - Intrinsic motivation in RL (Schmidhuber, Pathak) — only "curiosity", used as reward
+    shaping tool, not emotion itself
+  - Computational emotion models (Scherer CPM, OCC) — all rule-based, not learned
+
+Model F's architectural positioning — middleware, not standalone model:
+  Emotion has no modality. Language has text, vision has pixels. Emotion has no carrier —
+  it's a cross-cutting concern distributed across behavior, perception, memory, decision,
+  dreams, confabulation. Therefore:
+  - Making it a standalone "large model" makes no sense — it's not an X→Y function
+  - Making it a modulation middleware IS the right form — it maintains an abstract
+    emotional state field and broadcasts that field to color other modules' outputs
+
+  Architecture vision:
+    vision model  ──→ ┌──────────┐ ──→ behavior modulation
+    language model ──→ │ Model F  │ ──→ tone/word choice modulation
+    memory system  ──→ │(midware) │ ──→ attention bias
+    body state     ──→ └──────────┘ ──→ decision weighting
+
+Why the floating brain simplification is correct (not a compromise):
+  - Core dynamics (homeostasis, cross-interaction, rhythm) SHOULD be hand-designed
+    because there's no training signal for them
+  - Peripheral connections (sensing, acting, remembering) CAN use ML later
+  - Isolating the core lets you tell apart "dynamics are wrong" vs. "input mapping
+    is wrong" — impossible to debug if everything is connected from the start
+
 Next steps to consider:
 - Parameter tuning / presets ("calm", "volatile", "cycling") for different personality types
 - Longer runs (full circadian cycles) to observe day/night behavioral shifts
