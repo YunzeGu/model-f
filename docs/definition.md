@@ -67,6 +67,27 @@ The deep rules **fuel** surface behavior but do not **dictate** it. The gap betw
 | Surface-level purpose | Always present | Deliberately absent |
 | Autonomy | Instrumental | Intrinsic |
 
+## Design Scope: The Floating Brain
+
+Model F is deliberately scoped as a **"floating brain"** — a consciousness model with no sensory organs, suspended in a void, driven entirely by internal dynamics.
+
+### What was excluded and why
+
+1. **3D embodied simulation** (e.g., a cat in Unity) — requires solving sensory decoding (vision, touch, proprioception) before the core model is even validated. Deferred.
+2. **LLM / rational reasoning** — animals without complex logic still have desires. Model F must function without any language model. Rationality is a capability that plugs in later, not a prerequisite.
+3. **Language interaction mode** — output is numerical drive vectors, not text. Pure impulse generation.
+
+### Pluggable capability architecture
+
+Model F is a **base module** designed to accept future capability plugins:
+
+- **Memory** (long-term / short-term memory models)
+- **Logical reasoning** (LLM)
+- **Visual processing** (vision models)
+- **Motor control** (embodied agent interfaces)
+
+None of these are connected in v1. The core must be fully functional and interesting on its own — a self-contained impulse generator with clean input/output ports for future extension.
+
 ## Summary
 
 Model F is a **bionic subconscious**: a system that translates continuous physiological dynamics into spontaneous behavioral impulses, preserving affective fidelity without requiring phenomenal consciousness, and producing non-purposive autonomous drive as its primary output.
