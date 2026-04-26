@@ -17,13 +17,24 @@
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd ~/Desktop/model-f && git pull 2>&1 | tail -5",
+            "statusMessage": "Checking for updates..."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"/c/Users/80951/Desktop/Model F\" && git add -A && git commit -m \"auto snapshot $(date +%F_%T)\" && git push"
+            "command": "printf '# Last Modified\\n\\n**Time:** %s  \\n**Machine:** %s\\n' \"$(date '+%Y-%m-%d %H:%M:%S')\" \"$(hostname)\" > ~/Desktop/model-f/LAST_MODIFIED.md && cd ~/Desktop/model-f && git add -A && git commit -m \"auto snapshot $(date +%F_%T)\" && git push 2>&1 | tail -3"
           }
         ]
       }
