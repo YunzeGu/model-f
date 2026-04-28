@@ -16,29 +16,5 @@
       "Bash(C:/Users/80951/miniconda3/condabin/conda.bat:*)",
       "Bash(cursor --version)"
     ]
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd ~/Desktop/model-f && git pull 2>&1 | tail -5",
-            "statusMessage": "Checking for updates..."
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "printf '# Last Modified\\n\\n**Time:** %s  \\n**Machine:** %s\\n' \"$(date '+%Y-%m-%d %H:%M:%S')\" \"$(hostname)\" > ~/Desktop/model-f/LAST_MODIFIED.md && cd ~/Desktop/model-f && git add -A && git commit -m \"auto snapshot $(date +%F_%T)\" && git push 2>&1 | tail -3"
-          }
-        ]
-      }
-    ]
   }
 }
