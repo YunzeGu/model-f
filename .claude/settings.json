@@ -1,22 +1,4 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(gh auth:*)",
-      "Bash(gh repo:*)",
-      "Bash(gh api:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git status:*)",
-      "Bash(git log:*)",
-      "Bash(C:\\Users\\80951\\miniconda3\\envs\\modelf\\python.exe:*)",
-      "Bash(C:\\Users\\80951\\miniconda3\\envs\\modelf\\Scripts\\pip.exe:*)",
-      "Bash(C:/Users/80951/miniconda3/envs/modelf/python.exe:*)",
-      "Bash(C:/Users/80951/miniconda3/envs/modelf/Scripts/pip.exe:*)",
-      "Bash(C:/Users/80951/miniconda3/condabin/conda.bat:*)",
-      "Bash(cursor --version)"
-    ]
-  },
   "hooks": {
     "SessionStart": [
       {
